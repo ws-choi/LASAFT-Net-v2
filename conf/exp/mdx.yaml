@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - override /trainer: single_gpu
+  - override /dataset: default
+  - override /callbacks: default
+  - override /model: v2_light
+  - override /logger: wandb
+
+trainer:
+  gpus: 1
+  check_val_every_n_epoch: 10
+  deterministic: false # does not have to strictly deterministic
+  limit_train_batches: 1.0 # debug mode if 0.01
+
+dataset:
+  batch_size: 16

@@ -3,11 +3,11 @@ lr: 1e-3
 optimizer: adam
 initializer: kaiming
 
-name: lightsaft_net
+name: v2_light
 _target_: src.source_separation.lasaft_net_v2.base_framework.AbstractLaSAFTNet
 
-query_listen: False
-key_listen: False
+query_listen: True
+key_listen: True
 
 n_fft: 2048
 num_frame: 128
