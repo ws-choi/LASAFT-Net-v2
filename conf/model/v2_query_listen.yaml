@@ -2,6 +2,6 @@
 defaults:
     - v2.yaml
 
-name: v2_query_listen_ln
+name: v2_query_listen
 query_listen: True
 key_listen: False

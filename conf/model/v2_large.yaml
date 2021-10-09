@@ -3,7 +3,7 @@ defaults:
   - v2.yaml
 
 lr: 1e-4
-name: v2_query_ln_large
+name: v2_large
 n_fft: 4096
 
 spec2spec:

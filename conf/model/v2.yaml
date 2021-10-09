@@ -3,7 +3,7 @@ lr: 5e-4
 optimizer: adam
 initializer: kaiming
 
-name: v2_query_ln
+name: v2
 _target_: src.source_separation.lasaft_net_v2.base_framework.AbstractLaSAFTNet
 
 query_listen: True
