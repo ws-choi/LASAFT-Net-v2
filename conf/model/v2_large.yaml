@@ -1,0 +1,11 @@
+
+defaults:
+  - v2.yaml
+
+lr: 1e-4
+name: v2_query_ln_large
+n_fft: 4096
+
+spec2spec:
+  n_blocks: 9
+  embedding_dim: 64

@@ -1,0 +1,33 @@
+defaults:
+  - trainer: default
+  - dataset: default
+  - model: lightsaft_net # for dummy
+  - logger: wandb
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+eval_dir: ${work_dir}/outputs/2021-08-20/03-31-15
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+
+gpu_id: null
+batch_size: 8
+overlap_ratio: 0.5
+
+# pretty print config at the start of the run using Rich library
+print_config: True
+
+# disable python warnings if they annoy you
+ignore_warnings: True
+
+# learn more here: https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+work_dir: ${hydra:runtime.cwd}
+
+# personal settings
+data_dir: ${oc.env:data_dir}
+wandb_api_key: ${oc.env:wandb_api_key}
+
+debug: False

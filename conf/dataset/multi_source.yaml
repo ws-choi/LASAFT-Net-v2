@@ -1,0 +1,4 @@
+defaults:
+  - default
+
+multi_source_training: True

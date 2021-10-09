@@ -1,0 +1,29 @@
+defaults:
+  - trainer: default
+  - dataset: default
+  - callbacks: default
+  - model: lightsaft_net
+  - logger: wandb
+  - exp: null
+
+
+debug: False
+seed: null
+
+# pretty print config at the start of the run using Rich library
+print_config: True
+
+# disable python warnings if they annoy you
+ignore_warnings: True
+
+# learn more here: https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+work_dir: ${hydra:runtime.cwd}
+
+# personal settings
+data_dir: ${oc.env:data_dir}
+dev_data_dir: ${oc.env:dev_data_dir}
+wandb_api_key: ${oc.env:wandb_api_key}
+
+hydra:
+  run:
+    dir: logs/runs/${model.name}/${now:%Y%m%d-%H%M%S}

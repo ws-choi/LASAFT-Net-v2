@@ -1,0 +1,8 @@
+# @package _global_
+
+# to execute this experiment run:
+# python run.py experiment=example_simple.yaml
+
+defaults:
+  - ablation
+  - override /model: v2_key_listen
