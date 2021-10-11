@@ -1,5 +1,5 @@
 defaults:
-  - model: lightsaft_net
+  - model: v1_light
   - override hydra/hydra_logging: disabled
   - override hydra/job_logging: disabled
 
@@ -24,4 +24,4 @@ data_dir: ${oc.env:data_dir}
 wandb_api_key: ${oc.env:wandb_api_key}
 
 batch_size: 64
-overlap_ratio: 0.5
+overlap_ratio: 0

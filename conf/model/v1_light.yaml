@@ -24,14 +24,14 @@ spec2spec:
     _target_: src.source_separation.lasaft_net_v2.spec2spec.base.BaseNet
     n_fft: ${model.n_fft}
     input_channels: 4
-    internal_channels: 16
-    n_blocks: 9
-    n_internal_layers: 4
+    internal_channels: 20
+    n_blocks: 7
+    n_internal_layers: 5
     first_conv_activation: relu
     last_activation: identity
     control_vector_type: embedding
     control_input_dim: 4
-    embedding_dim: 64
+    embedding_dim: 32
     condition_to: decoder
     norm: ${model.norm}
 
@@ -47,7 +47,7 @@ spec2spec:
       activation: relu
       condition_dim: ${model.spec2spec.embedding_dim}
       num_tdfs: 16
-      dk: 64
+      dk: 32
       norm: ${model.norm}
       query_listen: ${model.query_listen}
       key_listen: ${model.key_listen}
