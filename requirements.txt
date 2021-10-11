@@ -1,3 +1,17 @@
+# --------- aicrowd --------- #
+aicrowd_api
+coloredlogs
+numpy
+loguru
+boto3
+openunmix
+musdb
+SoundFile
+scipy
+norbert
+asteroid>=0.5.0
+requests
+
 # --------- pytorch --------- #
 pytorch-lightning>=1.4.1
 
@@ -36,7 +50,5 @@ pudb
 
 # --------- kuielab --------- #
 coloredlogs
-loguru
-musdb
 museval
 wget
