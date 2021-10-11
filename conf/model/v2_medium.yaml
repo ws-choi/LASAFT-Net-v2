@@ -1,0 +1,63 @@
+
+lr: 5e-4
+optimizer: adam
+initializer: kaiming
+
+name: v2_medium
+_target_: src.source_separation.lasaft_net_v2.base_framework.AbstractLaSAFTNet
+
+query_listen: True
+key_listen: True
+
+n_fft: 2048
+num_frame: 128
+hop_length: 1024
+spec_type: complex
+spec_est_mode: mapping
+
+train_loss: spec_mse
+val_loss: raw_l1
+
+norm: 'bn'
+
+spec2spec:
+    _target_: src.source_separation.lasaft_net_v2.spec2spec.base.BaseNet
+    n_fft: ${model.n_fft}
+    input_channels: 4
+    internal_channels: 20
+    n_blocks: 7
+    n_internal_layers: 5
+    first_conv_activation: leaky_relu
+    last_activation: identity
+    control_vector_type: embedding
+    control_input_dim: 4
+    embedding_dim: 32
+    condition_to: decoder
+    norm: ${model.norm}
+
+    mk_block_f:
+      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MkTFCLightSAFTGPoCM
+      gr: ${model.spec2spec.internal_channels}
+      num_layers: ${model.spec2spec.n_internal_layers}
+      kt: 3
+      kf: 3
+      bn_factor: 16
+      min_bn_units: 16
+      bias: False
+      activation: leaky_relu
+      condition_dim: ${model.spec2spec.embedding_dim}
+      num_tdfs: 12
+      dk: 32
+      norm: ${model.norm}
+      query_listen: ${model.query_listen}
+      key_listen: ${model.key_listen}
+
+    mk_ds_f:
+      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MKConvDS
+      activation: leaky_relu
+      norm: ${model.norm}
+
+    mk_us_f:
+      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MkConvTransposeUS
+      activation: leaky_relu
+      norm: ${model.norm}
