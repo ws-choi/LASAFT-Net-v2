@@ -27,7 +27,7 @@ class LightSAFTPredictor(MusicDemixingPredictor):
 
                 print('checkpoint {} is loaded: '.format(ckpt_path))
             except FileNotFoundError:
-                print('FileNotFoundError.\n\t {} not exists'.format(ckpt_path))  # issue 10: fault tolerance
+                print('FileNotFoundError.\n\t {} not exists\ntest mode'.format(ckpt_path))  # issue 10: fault tolerance
 
         self.model = model
 
