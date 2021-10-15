@@ -1,6 +1,6 @@
 # Book settings
-title: Open-Source Tools & Data for Music Source Separation
-author: Alexandre Defossez, Haohe Liu, Woosung Choi, Ethan Manilow, Prem Seetharaman, Justin Salamon
+title: LASAFT-Net-v2
+author: Woosung Choi, Yeong-Seok Jeong, Jinsung Kim, Jaehwa Chung, Soonyoung Jung, and Joshua D. Reiss
 #logo: logo.png
 
 latex:
@@ -8,9 +8,9 @@ latex:
     targetname: book.tex
 
 repository:
-  url          : https://github.com/source-separation/tutorial
+  url          : https://github.com/ws-choi/LASAFT-Net-v2
   path_to_book : book
-  branch       : master
+  branch       : jb
 
 launch_buttons:
   notebook_interface: "classic"
@@ -26,7 +26,7 @@ execute:
 html:
   use_repository_button: true
   use_issues_button: true
-  google_analytics_id: UA-180111316-1
+#  google_analytics_id:
   
 bibtex_bibfiles:
   - references.bib
