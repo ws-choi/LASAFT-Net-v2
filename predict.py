@@ -12,8 +12,8 @@ from evaluator.music_demixing import MusicDemixingPredictor
 class LightSAFTPredictor(MusicDemixingPredictor):
     def prediction_setup(self):
 
-        conf_path = Path('./conf/pretrained/v1_light')
-        ckpt_path = conf_path.joinpath('epoch=199.ckpt')
+        conf_path = Path('./conf/pretrained/v2_light')
+        ckpt_path = conf_path.joinpath('epoch=669.ckpt')
 
         with open(conf_path.joinpath('config.yaml')) as f:
             train_config = OmegaConf.load(f)
@@ -51,7 +51,10 @@ class LightSAFTPredictor(MusicDemixingPredictor):
                                          overlap_ratio=0.5,
                                          batch_size=batch_size)
         vocals, drums, bass, other = res['vocals'], res['drums'], res['bass'], res['other']
-        print('response time: {}'.format(time.time()-start))
+        response_time = time.time()-start
+        print('response time: {:10.6f}/{}s'.format(response_time, mix.shape[0]//44100))
+        print('response time: {:10.6f}/s'.format(response_time/(mix.shape[0]/44100)))
+
 
         target_file_map = {
             "vocals": vocals_file_path,

@@ -4,5 +4,5 @@
 # python run.py experiment=example_simple.yaml
 
 defaults:
-  - mdx
+  - mdx_medium
   - override /model: v2_light

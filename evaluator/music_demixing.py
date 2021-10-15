@@ -24,12 +24,13 @@ def time_limit(seconds):
     def signal_handler(signum, frame):
         raise TimeoutException("Prediction timed out!")
 
-    signal.signal(signal.SIGALRM, signal_handler)
-    signal.alarm(seconds)
+    # signal.signal(signal.SIGALRM, signal_handler)
+    # signal.alarm(seconds)
     try:
         yield
     finally:
-        signal.alarm(0)
+        pass
+#        signal.alarm(0)
 
 
 class MusicDemixingPredictor:
