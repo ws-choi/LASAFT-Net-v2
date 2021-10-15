@@ -19,4 +19,4 @@
 |-------------------------|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | [KUILAB-MDX-Net](https://github.com/kuielab/mdx-net/tree/Leaderboard_A) | dedicated (1 source/ 1 model) | 8.901 | 7.173 | 7.232 | 5.636 | 7.236 |
 | [LaSAFT-Net-v1](https://github.com/ws-choi/Conditioned-Source-Separation-LaSAFT) (light) | conditioned (4 sources/ 1 model)  |  7.275		 | 5.935	 | 5.823	 | 4.557	 | 5.897 |
-| LASAFT-Net-v2 (light) | conditioned (4 sources/ 1 model) |  7.289	 | 6.038	 | 5.826 | 4.629 | 5.946 |
+| [LASAFT-Net-v2](https://github.com/ws-choi/LASAFT-Net-v2/tree/mdx-medium-v2-669) (light) | conditioned (4 sources/ 1 model) |  7.324	 | 5.976	 | 5.884 | 4.642 | 5.957 |
