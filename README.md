@@ -2,6 +2,10 @@
 
 ### Listen, Attend and Separate by Attentively aggregating Frequency Transformation
 
+Woosung Choi, Yeong-Seok Jeong, Jinsung Kim, Jaehwa Chung, Soonyoung Jung, and Joshua D. Reiss
+
+[Demonstration](https://ws-choi.github.io/LASAFT-Net-v2/) (under construction)
+
 ### Experimental Results
 
 - Musdb 18
