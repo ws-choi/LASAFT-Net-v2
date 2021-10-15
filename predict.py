@@ -13,7 +13,7 @@ class LightSAFTPredictor(MusicDemixingPredictor):
     def prediction_setup(self):
 
         conf_path = Path('./conf/pretrained/v2_medium')
-        ckpt_path = conf_path.joinpath('no checkpoint yet.ckpt')
+        ckpt_path = conf_path.joinpath('epoch=669.ckpt')
 
         with open(conf_path.joinpath('config.yaml')) as f:
             train_config = OmegaConf.load(f)
