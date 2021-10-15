@@ -1,5 +1,5 @@
 format: jb-book
-root: landing
+root: index
 parts:
   - caption: Introduction
 #    numbered: True
