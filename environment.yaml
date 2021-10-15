@@ -1,4 +1,4 @@
-name: lasaftv2
+name: lasaftv2-mdx
 
 channels:
   - pytorch
@@ -8,7 +8,6 @@ channels:
 dependencies:
   - python=3.8
   - pip
-  - cudatoolkit=11.1
   - pytorch=1.9.0
   - jupyter
   - librosa=0.8
