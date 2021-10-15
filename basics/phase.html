@@ -435,10 +435,10 @@ that the estimate for Source <span class="math notranslate nohighlight">\(i\)</s
 <div class="section" id="the-hard-way-part-1-phase-estimation">
 <h3>The Hard Way, Part 1: Phase Estimation<a class="headerlink" href="#the-hard-way-part-1-phase-estimation" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to <em>estimate</em> the phase once the estimated mask is applied to the
-mixture spectrogram. One popular way is the Griffin-Lim algorithm <span id="id3">[<a class="reference internal" href="../zzz_refs.html#id66">GL84</a>]</span>,
+mixture spectrogram. One popular way is the Griffin-Lim algorithm <span id="id3">[]</span>,
 which attempts to reconstruct the phase component of a spectrogram by iteratively
 computing an STFT and an inverse STFT. Griffin-Lim usually converges in 50-100
-iterations, although faster methods have been developed <span id="id4">[<a class="reference internal" href="../zzz_refs.html#id67">PBSondergaard13</a>]</span>.
+iterations, although faster methods have been developed <span id="id4">[]</span>.
 In our experience, Griffin-Lim can still leave artifacts in the audio.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -447,11 +447,11 @@ In our experience, Griffin-Lim can still leave artifacts in the audio.</p>
 <p>Multiple Input Spectrogram Inversion (MISI) is a variant of Girffin-Lim specifically
 designed for source separation with multiple sources. It adds an additional
 constraint to the original algorithm such that all of the estimated sources with
-estimated phase components must all add up to the input mixture. <span id="id5">[<a class="reference internal" href="../zzz_refs.html#id69">GS10</a>]</span></p>
+estimated phase components must all add up to the input mixture. <span id="id5">[]</span></p>
 <p>It’s worth noting that the STFT &amp; iSTFT computations, and these phase estimation
 algorithms are all differentiable. This means that we can incorporate them as
 part of neural network architectures and train directly on the waveforms, even
-when using mask-based algorithms. <span id="id6">[<a class="reference internal" href="../zzz_refs.html#id17">LRWW+19</a>, <a class="reference internal" href="../zzz_refs.html#id65">MYK+19</a>, <a class="reference internal" href="../zzz_refs.html#id68">WLR18</a>]</span></p>
+when using mask-based algorithms. <span id="id6">[]</span></p>
 </div>
 <div class="section" id="the-hard-way-part-2-waveform-estimation">
 <h3>The Hard Way, Part 2:  Waveform Estimation<a class="headerlink" href="#the-hard-way-part-2-waveform-estimation" title="Permalink to this headline">¶</a></h3>
@@ -461,7 +461,7 @@ deep learning-based models have been proposed that are “end-to-end”, meaning
 the model’s input and output are all waveforms. In this case, the model decides
 how it wants to represent phase. This might not always be the most efficient
 or effective solution, although many ways to mitigate the drawbacks of this tactic
-are currently being researched. <span id="id7">[<a class="reference internal" href="../zzz_refs.html#id71">EAC+18</a>, <a class="reference internal" href="../zzz_refs.html#id70">EGR+19</a>]</span></p>
+are currently being researched. <span id="id7">[]</span></p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="fn2"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>

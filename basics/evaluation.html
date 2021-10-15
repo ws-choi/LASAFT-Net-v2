@@ -358,7 +358,7 @@ of four separate components,</p>
 <span class="math notranslate nohighlight">\(e_{\text{artif}}\)</span> are error terms for interference, noise, and added \text{artif}acts,
 respectively. The actual calculations of these terms is quite complex, so
 we refer the curious reader to the original paper for their exact calculation:
-<span id="id2">[<a class="reference internal" href="../zzz_refs.html#id63">VGFevotte06</a>]</span>.</p>
+<span id="id2">[]</span>.</p>
 <p>Using these four terms, we can define our measures. All of the measures
 are in terms of decibels (dB), with higher values being better.
 To calculate they require access to the ground truth isolated sources and
@@ -390,7 +390,7 @@ is usually SDR.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As of this writing (October 2020), the best reported SDR for singing
-voice separation on MUSDB18 is <span class="math notranslate nohighlight">\(7.24 dB\)</span>. <span id="id3">[<a class="reference internal" href="../zzz_refs.html#id72">TM20</a>]</span>
+voice separation on MUSDB18 is <span class="math notranslate nohighlight">\(7.24 dB\)</span>. <span id="id3">[]</span>
 Recent research papers have been reporting vocal SDRs on MUSDB18
 in the range of 6-7 dB.
 Compare the SDR of different systems at this
@@ -411,7 +411,7 @@ Compare the SDR of different systems at this
 <span class="math notranslate nohighlight">\(e_{\text{artif}}\)</span> terms
 can lead to issues where the original signal (top) can be horribly degraded (bottom)
 and still get a very high SDR score.
-Image used courtesy of Jonathan Le Roux. <span id="id4">[<a class="reference internal" href="../zzz_refs.html#id64">LRWEH19</a>]</span></span><a class="headerlink" href="#sdr-vs-sisdr" title="Permalink to this image">¶</a></p>
+Image used courtesy of Jonathan Le Roux. <span id="id4">[]</span></span><a class="headerlink" href="#sdr-vs-sisdr" title="Permalink to this image">¶</a></p>
 </div>
 <p>A handful of issues have been brought up in the years since it was
 originally proposed. Although some of the issues are implementation-specific,
@@ -421,7 +421,7 @@ that SDR calculates the <span class="math notranslate nohighlight">\(e_{\text{in
 inflated.</p>
 <p>Scale-Invariant Source-to-Distortion Ratio (SI-SDR) aims to remedy this
 by removing SDR’s dependency on the amplitude scaling of the signal.
-<span id="id5">[<a class="reference internal" href="../zzz_refs.html#id64">LRWEH19</a>]</span> It also comes with accompanying SI-SAR, and SI-SIR,
+<span id="id5">[]</span> It also comes with accompanying SI-SAR, and SI-SIR,
 which corresponds to SAR and SIR described above, respectively.
 Although these measures are not sensitive to amplitude scaling, it
 is a quicker computation because it does not require windowing
@@ -490,22 +490,22 @@ SoX could not be found!
   libswresample   3.  9.100 /  3.  9.100
   libpostproc    55.  9.100 / 55.  9.100
 Guessed Channel Layout for Input Stream #0.0 : stereo
-Input #0, wav, from &#39;/tmp/tmpz0tk1ez3.wav&#39;:
+Input #0, wav, from &#39;/tmp/tmpchij7y2i.wav&#39;:
   Duration: 00:00:30.00, bitrate: 1411 kb/s
   Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 44100 Hz, stereo, s16, 1411 kb/s
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (pcm_s16le (native) -&gt; mp3 (libmp3lame))
 Press [q] to stop, [?] for help
-Output #0, mp3, to &#39;/tmp/tmp5sgd64co.mp3&#39;:
+Output #0, mp3, to &#39;/tmp/tmp6ywal4nd.mp3&#39;:
   Metadata:
     TSSE            : Lavf58.76.100
   Stream #0:0: Audio: mp3, 44100 Hz, stereo, s16p, 128 kb/s
     Metadata:
       encoder         : Lavc58.134.100 libmp3lame
-size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A    
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=66.5x    
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=61.7x    
 video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.009362%
 </pre></div>
 </div>
@@ -527,25 +527,25 @@ video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing o
   libswresample   3.  9.100 /  3.  9.100
   libpostproc    55.  9.100 / 55.  9.100
 Guessed Channel Layout for Input Stream #0.0 : stereo
-Input #0, wav, from &#39;/tmp/tmplz75iqsb.wav&#39;:
+Input #0, wav, from &#39;/tmp/tmp0ons4jmp.wav&#39;:
   Duration: 00:00:30.00, bitrate: 1411 kb/s
   Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 44100 Hz, stereo, s16, 1411 kb/s
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (pcm_s16le (native) -&gt; mp3 (libmp3lame))
 Press [q] to stop, [?] for help
-Output #0, mp3, to &#39;/tmp/tmpc2y9sls5.mp3&#39;:
+Output #0, mp3, to &#39;/tmp/tmp8se5ce3t.mp3&#39;:
   Metadata:
     TSSE            : Lavf58.76.100
   Stream #0:0: Audio: mp3, 44100 Hz, stereo, s16p, 128 kb/s
     Metadata:
       encoder         : Lavc58.134.100 libmp3lame
-size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A    
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reference Source
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=71.3x    
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=64.5x    
 video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.009362%
 </pre></div>
 </div>
@@ -567,13 +567,13 @@ video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing o
   libswresample   3.  9.100 /  3.  9.100
   libpostproc    55.  9.100 / 55.  9.100
 Guessed Channel Layout for Input Stream #0.0 : stereo
-Input #0, wav, from &#39;/tmp/tmpqvstjwzh.wav&#39;:
+Input #0, wav, from &#39;/tmp/tmpxk8ioze6.wav&#39;:
   Duration: 00:00:30.00, bitrate: 1411 kb/s
   Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 44100 Hz, stereo, s16, 1411 kb/s
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (pcm_s16le (native) -&gt; mp3 (libmp3lame))
 Press [q] to stop, [?] for help
-Output #0, mp3, to &#39;/tmp/tmp4dcjjc98.mp3&#39;:
+Output #0, mp3, to &#39;/tmp/tmp_m4c36vr.mp3&#39;:
   Metadata:
     TSSE            : Lavf58.76.100
   Stream #0:0: Audio: mp3, 44100 Hz, stereo, s16p, 128 kb/s
@@ -585,7 +585,7 @@ size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ConvTasnet Source
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=74.3x    
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     469kB time=00:00:29.98 bitrate= 128.2kbits/s speed=60.2x    
 video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.009362%
 </pre></div>
 </div>
@@ -607,25 +607,26 @@ video:0kB audio:469kB subtitle:0kB other streams:0kB global headers:0kB muxing o
   libswresample   3.  9.100 /  3.  9.100
   libpostproc    55.  9.100 / 55.  9.100
 Guessed Channel Layout for Input Stream #0.0 : stereo
-Input #0, wav, from &#39;/tmp/tmp5yj2bgso.wav&#39;:
+Input #0, wav, from &#39;/tmp/tmplq6n829b.wav&#39;:
   Duration: 00:00:30.03, bitrate: 1411 kb/s
   Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 44100 Hz, stereo, s16, 1411 kb/s
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (pcm_s16le (native) -&gt; mp3 (libmp3lame))
 Press [q] to stop, [?] for help
-Output #0, mp3, to &#39;/tmp/tmpw7i56ecm.mp3&#39;:
+Output #0, mp3, to &#39;/tmp/tmp6xnosw09.mp3&#39;:
   Metadata:
     TSSE            : Lavf58.76.100
   Stream #0:0: Audio: mp3, 44100 Hz, stereo, s16p, 128 kb/s
     Metadata:
       encoder         : Lavc58.134.100 libmp3lame
-size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A    
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open-Unmix Estimate
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     470kB time=00:00:30.01 bitrate= 128.2kbits/s speed=65.3x    
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size=     256kB time=00:00:28.70 bitrate=  73.0kbits/s speed=57.4x    
+size=     470kB time=00:00:30.01 bitrate= 128.2kbits/s speed=57.8x    
 video:0kB audio:470kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.009354%
 </pre></div>
 </div>
@@ -657,7 +658,7 @@ tests, which rarely—if ever—happen when evaluating source separation
 because of how time-consuming and expensive they are.</p>
 <p>Some studies have come have shown that crowd sourcing results from
 MUSHRA-like online listening studies can be an effective alternative
-to trained experts in a controlled setting. <span id="id6">[<a class="reference internal" href="../zzz_refs.html#id75">CPMH16</a>, <a class="reference internal" href="../zzz_refs.html#id77">SBStoter+18</a>]</span>
+to trained experts in a controlled setting. <span id="id6">[]</span>
 Although this is much
 cheaper than a full-blown MUSHRA study, it still costs money ($100-200 USD)
 and takes a few days to get the results. Calculating SDR values on
