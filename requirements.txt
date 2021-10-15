@@ -1,0 +1,14 @@
+jupyter-book
+jupyterlab
+matplotlib
+numpy
+librosa
+nussl
+scaper==1.6.4
+numpydoc
+pyyaml
+gradio
+gif
+pyloudnorm
+gradio
+gif

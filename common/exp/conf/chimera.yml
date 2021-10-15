@@ -1,0 +1,34 @@
+$include: 
+  - common/exp/conf/musdb18.yml # change to musdb18.yml for actual models
+  - common/exp/conf/base.yml
+
+recurrent_chimera.bidirectional: 1
+recurrent_chimera.dropout: 0.3
+recurrent_chimera.embedding_activation:
+- sigmoid
+- unit_norm
+recurrent_chimera.embedding_size: 20
+recurrent_chimera.hidden_size: 300
+recurrent_chimera.mask_activation:
+- sigmoid
+recurrent_chimera.num_audio_channels: 1
+recurrent_chimera.num_layers: 4
+recurrent_chimera.num_sources: 1
+recurrent_chimera.rnn_type: lstm
+
+deep_mask_estimation.mask_type: soft
+deep_mask_estimation.model_path: checkpoints/best.model.pth
+
+train.batch_size: 16
+train.dpcl_weight: 0.0
+train.epoch_length: 1000
+train.lr: 0.001
+train.mi_weight: 1.0
+train.num_epochs: 100
+train.num_workers: 8
+train.output_folder: .
+train.seed: 0
+
+train.target_instrument: $target_instrument
+evaluate.target_instrument: $target_instrument
+mixer.target_instrument: $target_instrument

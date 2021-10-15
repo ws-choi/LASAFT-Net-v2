@@ -1,0 +1,20 @@
+name: tutorial-environment
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - libsndfile
+  - ffmpeg
+  - pip
+  - pip:
+    - jupyter-book
+    - jupyterlab
+    - numpy
+    - matplotlib
+    - librosa
+    - nussl
+    - scaper
+    - soxbindings
+    - numpydoc
+    - pyloudnorm
+    - gradio
