@@ -1,3 +1,0 @@
-(demucs_pp)=
-
-# Demucs++
