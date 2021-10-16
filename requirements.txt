@@ -9,26 +9,19 @@ musdb
 SoundFile
 scipy
 norbert
-asteroid>=0.5.0
 requests
 
 # --------- pytorch --------- #
+torch==1.9.0
 pytorch-lightning>=1.4.1
 
 # --------- hydra --------- #
 hydra-core==1.1.0.rc1
 hydra-colorlog==1.1.0.dev1
 hydra-optuna-sweeper==1.1.0.dev2
-# hydra-ax-sweeper==1.1.0
-# hydra-ray-launcher==0.1.2
-# hydra-submitit-launcher==1.1.0
 
 # --------- loggers --------- #
 wandb>=0.10.30
-# neptune-client
-# mlflow
-# comet-ml
-# torch_tb_profiler
 
 # --------- linters --------- #
 pre-commit
@@ -45,10 +38,9 @@ sh
 scikit-learn
 seaborn
 pudb
-# dvc
-
 
 # --------- kuielab --------- #
 coloredlogs
 museval
-wget
+jupyter
+librosa==0.8

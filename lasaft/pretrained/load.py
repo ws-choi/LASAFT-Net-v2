@@ -5,7 +5,8 @@ import torch
 from omegaconf import OmegaConf
 
 def get_mdx_light_v2_699():
-    conf_path = pkg_resources.resource_filename('lasaft', 'conf/pretrained/v2_light/')
+
+    conf_path = pkg_resources.resource_filename('lasaft', 'pretrained/v2_light/')
     conf_path = Path(conf_path)
     ckpt_path = conf_path.joinpath('epoch=669.ckpt')
 
