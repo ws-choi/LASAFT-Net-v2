@@ -1,9 +1,7 @@
 format: jb-book
 root: index
-#parts:
-#  - caption: Introduction
-#    numbered: True
-#    chapters:
-#    - file: intro/tutorial_structure
-#    - file: intro/src_sep_101
-#    - file: intro/open_src_projects
+parts:
+ - caption: Quick Start
+   chapters:
+   - file: quickstart/index
+   - file: quickstart/lasaft-net-v2-light
