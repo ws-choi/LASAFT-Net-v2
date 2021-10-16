@@ -95,7 +95,7 @@ class STFT(pl.LightningModule):
         else:
             window = self.window
 
-        return torch.istft(spec_complex, self.n_fft, self.hop_length, window=window)
+        return torch.istft(spec_complex, self.n_fft, self.hop_length, window=window, return_complex=False)
 
     def restore_mag_phase(self, mag, phase, power=1.):
         """
