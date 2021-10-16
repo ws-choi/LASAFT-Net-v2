@@ -7,8 +7,8 @@ from omegaconf import DictConfig
 from pytorch_lightning import seed_everything, Callback
 from pytorch_lightning.loggers import WandbLogger
 
-from src.utils.functions import wandb_login, log_hyperparameters
-from src.utils.instantiator import HydraInstantiator as HI
+from lasaft.utils.functions import wandb_login, log_hyperparameters
+from lasaft.utils.instantiator import HydraInstantiator as HI
 
 
 def train(cfg: DictConfig):

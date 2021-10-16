@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
-from src.source_separation.sub_modules.building_blocks import *
-from src.utils.functions import get_activation_by_name
+from lasaft.models.sub_modules.building_blocks import *
+from lasaft.utils.functions import get_activation_by_name
 
 
 class MkBlock(object):

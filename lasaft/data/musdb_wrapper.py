@@ -2,7 +2,7 @@ import random
 from abc import ABCMeta
 from pathlib import Path
 from torch.utils.data import Dataset
-from src.utils.fourier import get_trim_length
+from lasaft.utils.fourier import get_trim_length
 
 import musdb
 import numpy as np

@@ -3,7 +3,7 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.utilities.distributed import rank_zero_info
 
-from src.scripts import batch_evaluator
+from lasaft.scripts import batch_evaluator
 
 dotenv.load_dotenv(override=True)
 

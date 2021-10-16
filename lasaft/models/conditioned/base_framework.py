@@ -2,11 +2,11 @@ import soundfile
 import torch
 from torch.utils.data import DataLoader
 
-from src.data.musdb_wrapper import SingleTrackSet
-from src.source_separation.loss_functions import get_conditional_loss, MultiSourceSpectrogramLoss
-from src.source_separation.lasaft_net_v2.abstract_framework import AbstractSeparator
-from src.utils import fourier
-from src.utils.fourier import get_trim_length
+from lasaft.data.musdb_wrapper import SingleTrackSet
+from lasaft.models.loss_functions import get_conditional_loss, MultiSourceSpectrogramLoss
+from lasaft.models.conditioned.abstract_framework import AbstractSeparator
+from lasaft.utils import fourier
+from lasaft.utils.fourier import get_trim_length
 
 
 class AbstractLaSAFTNet(AbstractSeparator):

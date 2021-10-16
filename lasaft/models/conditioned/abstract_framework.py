@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 import pytorch_lightning as pl
 import torch
 
-from src.utils.functions import get_optimizer_by_name
+from lasaft.utils.functions import get_optimizer_by_name
 
 
 class AbstractSeparator(pl.LightningModule, metaclass=ABCMeta):

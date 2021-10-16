@@ -4,7 +4,7 @@ optimizer: adam
 initializer: kaiming
 
 name: v2
-_target_: src.source_separation.lasaft_net_v2.base_framework.AbstractLaSAFTNet
+_target_: lasaft.models.conditioned.base_framework.AbstractLaSAFTNet
 
 query_listen: True
 key_listen: True
@@ -21,7 +21,7 @@ val_loss: raw_l1
 norm: 'bn'
 
 spec2spec:
-    _target_: src.source_separation.lasaft_net_v2.spec2spec.base.BaseNet
+    _target_: lasaft.models.conditioned.spec2spec.base.BaseNet
     n_fft: ${model.n_fft}
     input_channels: 4
     internal_channels: 24
@@ -36,7 +36,7 @@ spec2spec:
     norm: ${model.norm}
 
     mk_block_f:
-      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MkTFCLightSAFTGPoCM
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MkTFCLightSAFTGPoCM
       gr: ${model.spec2spec.internal_channels}
       num_layers: ${model.spec2spec.n_internal_layers}
       kt: 3
@@ -53,11 +53,11 @@ spec2spec:
       key_listen: ${model.key_listen}
 
     mk_ds_f:
-      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MKConvDS
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MKConvDS
       activation: relu
       norm: ${model.norm}
 
     mk_us_f:
-      _target_: src.source_separation.lasaft_net_v2.spec2spec.block_functions.MkConvTransposeUS
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MkConvTransposeUS
       activation: relu
       norm: ${model.norm}

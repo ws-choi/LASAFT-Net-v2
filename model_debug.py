@@ -2,8 +2,8 @@ import dotenv
 import hydra
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.utilities.distributed import rank_zero_info
-from src.source_separation.conditioned.scripts import trainer as trainer
-from src.utils.functions import mkdir_if_not_exists, print_config
+from lasaft.models.conditioned.scripts import trainer as trainer
+from lasaft.utils.functions import mkdir_if_not_exists, print_config
 
 dotenv.load_dotenv(override=True)
 

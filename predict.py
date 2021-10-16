@@ -12,7 +12,7 @@ from evaluator.music_demixing import MusicDemixingPredictor
 class LightSAFTPredictor(MusicDemixingPredictor):
     def prediction_setup(self):
 
-        conf_path = Path('./conf/pretrained/v2_light')
+        conf_path = Path('lasaft/pretrained/v2_light')
         ckpt_path = conf_path.joinpath('epoch=669.ckpt')
 
         with open(conf_path.joinpath('config.yaml')) as f:
