@@ -22,3 +22,5 @@ def get_mdx_light_v2_699():
             print('checkpoint {} is loaded: '.format(ckpt_path))
         except FileNotFoundError:
             print('FileNotFoundError.\n\t {} not exists\ntest mode'.format(ckpt_path))  # issue 10: fault tolerance
+
+    return model
