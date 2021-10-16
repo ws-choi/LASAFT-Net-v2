@@ -1,0 +1,17 @@
+name: lasaftv2-mdx
+
+channels:
+  - pytorch
+  - conda-forge
+  - anaconda
+
+dependencies:
+  - python=3.8
+  - pip
+  - pytorch=1.9.0
+  - jupyter
+  - librosa=0.8
+  - ffmpeg=4.3.2
+
+  - pip:
+      - -r requirements.txt
