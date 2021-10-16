@@ -32,5 +32,8 @@ setup(
     install_requires=[
         REQUIREMENTS
     ],
-    include_package_data=True
+    package_data = {
+        # If any package contains *.txt or *.rst files, include them:
+        '': ['*.ckpt', '*.yaml'],
+    },
 )
