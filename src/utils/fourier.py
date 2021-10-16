@@ -54,7 +54,7 @@ class STFT(pl.LightningModule):
         # else:
         #     window = self.window
 
-        return torch.stft(input_signal, self.n_fft, self.hop_length, window=self.window)
+        return torch.stft(input_signal, self.n_fft, self.hop_length, window=self.window, return_complex=False)
 
     def to_mag(self, input_signal, power=1.0):
         """
