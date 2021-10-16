@@ -3,7 +3,7 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.utilities.distributed import rank_zero_info
 
-from src.source_separation.conditioned.scripts import evaluator
+from lasaft.models.conditioned.scripts import evaluator
 
 dotenv.load_dotenv(override=True)
 

@@ -3,7 +3,7 @@ from warnings import warn
 
 from torch.utils.data import DataLoader
 
-from src.data.musdb_wrapper import MusdbTrainSet, MusdbValidSetWithGT, MusdbTestSetWithGT, MusdbTrainSetMultiSource
+from lasaft.data.musdb_wrapper import MusdbTrainSet, MusdbValidSetWithGT, MusdbTestSetWithGT, MusdbTrainSetMultiSource
 
 
 class DataProvider(object):

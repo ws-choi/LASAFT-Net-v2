@@ -1,8 +1,8 @@
 from warnings import warn
 
-from src.source_separation.lasaft_net_v2.spec2spec.embedding import LinearEmbedding
-from src.source_separation.sub_modules.building_blocks import mk_norm_2d
-from src.utils.functions import get_activation_by_name
+from lasaft.models.conditioned.spec2spec.embedding import LinearEmbedding
+from lasaft.models.sub_modules.building_blocks import mk_norm_2d
+from lasaft.utils.functions import get_activation_by_name
 import torch
 import torch.nn as nn
 

@@ -6,8 +6,8 @@ import torch
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.loggers import WandbLogger
 
-from src.utils.functions import wandb_login
-from src.utils.instantiator import HydraInstantiator as HI
+from lasaft.utils.functions import wandb_login
+from lasaft.utils.instantiator import HydraInstantiator as HI
 
 
 def batch_eval(cfg: DictConfig):

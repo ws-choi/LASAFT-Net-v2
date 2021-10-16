@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from torch.nn.utils import weight_norm
 
-from src.utils.PoCM_utils import Pocm_Matmul
+from lasaft.utils.PoCM_utils import Pocm_Matmul
 
 
 def mk_norm_2d(num_channels, norm):

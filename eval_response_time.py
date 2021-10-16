@@ -7,7 +7,7 @@ import numpy as np
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.utilities.distributed import rank_zero_info
 
-from src.utils.functions import print_config
+from lasaft.utils.functions import print_config
 
 dotenv.load_dotenv(override=True)
 

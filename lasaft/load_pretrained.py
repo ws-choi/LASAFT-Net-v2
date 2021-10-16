@@ -6,7 +6,7 @@ from omegaconf import OmegaConf
 
 
 def get_mdx_light_v2_699():
-    conf_path = Path('./conf/pretrained/v2_light')
+    conf_path = Path('../conf/pretrained/v2_light')
     ckpt_path = conf_path.joinpath('epoch=669.ckpt')
 
     with open(conf_path.joinpath('config.yaml')) as f:

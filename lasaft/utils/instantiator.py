@@ -1,5 +1,5 @@
 from pytorch_lightning import Trainer
-from src.data.data_provider import DataProvider
+from lasaft.data.data_provider import DataProvider
 import hydra
 from omegaconf import DictConfig
 
