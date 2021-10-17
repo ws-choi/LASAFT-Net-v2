@@ -3,5 +3,5 @@ root: index
 parts:
  - caption: Getting started
    chapters:
-   - file: quickstart/index
-   - file: quickstart/lasaft-net-v2-light
+   - file: getting_start/index
+   - file: getting_start/lasaft-net-v2-light
