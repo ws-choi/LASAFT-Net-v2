@@ -36,13 +36,13 @@ Below is the experimental results of LASAFT-Net-V2.
 | [KUILAB-MDX-Net](https://github.com/kuielab/mdx-net/tree/Leaderboard_A) |X  | **8.901** | 7.173 | 7.232 | **5.636** | 7.236 |
 | Kazane Team | X | 7.686 | 7.018 | 6.993 | 4.901 | 6.649 |
 | [LASAFT-Net-v2.0](https://github.com/ws-choi/LASAFT-Net-v2/tree/mdx-medium-v2-669) | O  |  **7.354**	 | **5.996**	 | **5.894** | **4.595** | **5.960** |
-| LaSAFT-Net-v1.5 | O   |  7.275		 | 5.935	 | 5.823	 | 4.557	 | 5.897 |
+| LaSAFT-Net-v1.2 | O   |  7.275		 | 5.935	 | 5.823	 | 4.557	 | 5.897 |
 | Demucs48-HQ | X | 6.496	 | 6.509	 | 6.470 | 4.018 | 5.873 |
-| LaSAFT-Net-v1.0 | O | 6.685  | 5.272     | 5.498 | 4.121 | 5.394 |
+| LaSAFT-Net-v1.1 | O | 6.685  | 5.272     | 5.498 | 4.121 | 5.394 |
 | XUMXPredictor |X |  6.341 | 5.807	| 5.615 | 3.722 | 5.372 | 
 | UMXPredictor |X | 5.999	| 5.504 | 5.357 | 3.309 | 5.042 |
 
-> LaSAFT-Net-v1.0 is also known as lightsaft
+> LaSAFT-Net-v1.1 is also known as lightsaft-net
 
 In this tutorial, we explain how to use, train and evaluate our model.
 
