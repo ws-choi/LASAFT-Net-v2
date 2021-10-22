@@ -1,12 +1,12 @@
 defaults:
   - trainer: default
   - dataset: default
-  - model: lightsaft_net # for dummy
+  - model: v2 # for dummy
   - logger: wandb
   - override hydra/hydra_logging: disabled
   - override hydra/job_logging: disabled
 
-eval_dir: ${work_dir}/outputs/2021-08-20/03-31-15
+eval_dir: [your evaluation directory]
 
 hydra:
   run:
