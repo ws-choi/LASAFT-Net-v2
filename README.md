@@ -1,5 +1,6 @@
 ## LASAFT-Net-v2
 
+
 ### Listen, Attend and Separate by Attentively aggregating Frequency Transformation
 
 Woosung Choi, Yeong-Seok Jeong, Jinsung Kim, Jaehwa Chung, Soonyoung Jung, and Joshua D. Reiss
@@ -24,3 +25,32 @@ Woosung Choi, Yeong-Seok Jeong, Jinsung Kim, Jaehwa Chung, Soonyoung Jung, and J
 | [KUILAB-MDX-Net](https://github.com/kuielab/mdx-net/tree/Leaderboard_A) | dedicated (1 source/ 1 model) | 8.901 | 7.173 | 7.232 | 5.636 | 7.236 |
 | [LaSAFT-Net-v1](https://github.com/ws-choi/Conditioned-Source-Separation-LaSAFT) (light) | conditioned (4 sources/ 1 model)  |  7.275		 | 5.935	 | 5.823	 | 4.557	 | 5.897 |
 | [LASAFT-Net-v2](https://github.com/ws-choi/LASAFT-Net-v2/tree/mdx-medium-v2-669) (light) | conditioned (4 sources/ 1 model) |  7.324	 | 5.976	 | 5.884 | 4.642 | 5.957 |
+
+
+### How to reproduce
+
+#### 1. Environment
+
+- Ubuntu 20.04
+- wandb for logging
+
+You ***must*** create .env file by copying .env.sample to set environmental variables.
+
+```
+wandb_api_key=[Your Key] # "xxxxxxxxxxxxxxxxxxxxxxxx"
+data_dir=[Your Path] # "/home/ielab/repos/musdbHQ"
+```
+
+- about ```wandb_api_key```
+   - we currently only support wandb for logging.
+   - for ```wandb_api_key```, visit [wandb](https://wandb.ai/site), go to ```setting```, and then copy your api key
+- about ```data_dir```
+   - the ***absolute*** path where datasets are stored
+
+#### 2. Installation (cuda)
+
+```bash
+conda env create -f environment.yaml -n lasaftv2
+conda activate lasaftv2
+pip install -r requirements.txt
+```
