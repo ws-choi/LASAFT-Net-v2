@@ -12,7 +12,7 @@ norbert
 requests
 
 # --------- pytorch --------- #
-torch==1.9.0
+torch>=1.9.0
 pytorch-lightning>=1.4.1
 
 # --------- hydra --------- #
