@@ -1,0 +1,7 @@
+
+defaults:
+    - v2.yaml
+
+name: v2_no_listen
+query_listen: False
+key_listen: False
