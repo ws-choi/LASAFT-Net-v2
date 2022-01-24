@@ -5,3 +5,4 @@ defaults:
 name: v2_no_listen
 query_listen: False
 key_listen: False
+lr: 1e-3
