@@ -5,5 +5,20 @@ parts:
    chapters:
    - file: getting_start/index
    - file: getting_start/lasaft-net-v2-light
-   - file: getting_start/lasaft-net-v2-medium
    - file: getting_start/lasaft-net-v2-large
+ - caption: Demonstration
+   chapters:
+   - file: demo/index
+   - file: demo/sample1
+   - file: demo/sample2
+   - file: demo/sample3
+   - file: demo/sample4
+   - file: demo/sample5
+   - file: demo/sample6
+   - file: demo/sample7
+   - file: demo/sample8
+   - file: demo/sample9
+   - file: demo/sample10
+   
+
+

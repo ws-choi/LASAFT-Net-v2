@@ -26,6 +26,8 @@ Below is the experimental results of LASAFT-Net-V2.
 | [AMSS-Net](https://github.com/ws-choi/AMSS-Net) | O  |      6.78     |      5.92     |      5.10     |      4.51     |      5.58     |
 | [LaSAFT-Net-v1](https://github.com/ws-choi/Conditioned-Source-Separation-LaSAFT) | O  |     7.33    |      5.68     | 5.63 | **4.87** |      5.88     |
 | LASAFT-Net-v2 | O  | **7.57** | 6.13 |      5.28     | **4.87** | 5.96 |
+| LASAFT-Net-v2 (updated) | O  | 7.43±0.09 | 6.23±0.05 | 5.28±0.19     | 4.89±0.05 | 5.99±0.03 |
+
 
 ### MDX Challenge ([Leaderboard A](https://www.aicrowd.com/challenges/music-demixing-challenge-ismir-2021/leaderboards?challenge_leaderboard_extra_id=868&challenge_round_id=886))
 
