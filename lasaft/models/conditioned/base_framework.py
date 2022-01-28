@@ -347,6 +347,10 @@ class AbstractLaSAFTNetWithZeroShot(AbstractLaSAFTNet):
     def validation_step(self, batch, batch_idx):
         mixtures, targets, mixture_ids, window_offsets, input_conditions, target_names = batch
 
+        query_condition = torch.zeros(size = [mixtures.size(0), self.mean_latent.size(-1)]).type_as(mixtures)
+        for i, c in enumerate(input_conditions):
+            query_condition[i] = self.mean_latent[c]
+        input_conditions = query_condition
         loss = self.val_loss(self, mixtures, input_conditions, targets)
         self.log('val_loss', loss, prog_bar=False, logger=True, on_step=False, on_epoch=True, sync_dist=True)
         return loss

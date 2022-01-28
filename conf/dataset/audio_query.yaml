@@ -3,7 +3,7 @@ musdb_root: ${data_dir}
 batch_size: 8
 num_workers: 0
 pin_memory: True
-num_frame: 128
+num_frame: 16
 hop_length: 1024
 n_fft: 2048
 multi_source_training: False

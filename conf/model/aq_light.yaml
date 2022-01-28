@@ -9,7 +9,7 @@ norm: 'bn'
 _target_: lasaft.models.conditioned.base_framework.AbstractLaSAFTNetWithZeroShot
 
 n_fft: 2048
-num_frame: 128
+num_frame: 16
 hop_length: 1024
 spec_type: complex
 spec_est_mode: mapping
