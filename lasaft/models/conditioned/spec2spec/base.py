@@ -18,7 +18,7 @@ class BaseNet(nn.Module):
 
                  # Conditional Mechanism #
                  control_vector_type, control_input_dim, embedding_dim, condition_to,
-                 norm='bn'
+                 norm='bn', custom_embedding=None
                  ):
 
         first_conv_activation = get_activation_by_name(first_conv_activation)
@@ -37,7 +37,7 @@ class BaseNet(nn.Module):
         #########################
         # Conditional Mechanism #
         #########################
-        assert control_vector_type in ['one_hot_mode', 'embedding', 'linear']
+        assert control_vector_type in ['one_hot_mode', 'embedding', 'linear', 'custom']
         if control_vector_type == 'one_hot_mode':
             if control_input_dim != embedding_dim:
                 warn('in one_hot_mode, embedding_dim should be the same as num_targets. auto correction')
@@ -55,6 +55,9 @@ class BaseNet(nn.Module):
 
         elif control_vector_type == 'linear':
             self.embedding = LinearEmbedding(control_input_dim, embedding_dim)
+
+        elif control_vector_type == 'custom':
+            self.embedding = custom_embedding
 
         self.control_input_dim = control_input_dim
         self.embedding_dim = embedding_dim
@@ -201,3 +204,45 @@ def repeat_conditions(num_conditions, a_tensor):
     x_shape[0] = -1
     a_tensor = a_tensor.view(x_shape)
     return a_tensor
+
+
+class BaseNetWithZeroShot(BaseNet):
+    def __init__(self, n_fft, input_channels, internal_channels, n_blocks, n_internal_layers, mk_block_f, mk_ds_f, mk_us_f,
+                 first_conv_activation, last_activation, control_vector_type, control_input_dim, embedding_dim, condition_to,
+                 norm='bn', custom_embedding=None):
+        super(BaseNetWithZeroShot, self).__init__(n_fft, input_channels, internal_channels, n_blocks, n_internal_layers, mk_block_f,
+                                                  mk_ds_f, mk_us_f, first_conv_activation, last_activation, control_vector_type,
+                                                  control_input_dim, embedding_dim, condition_to, norm, custom_embedding)
+        self.train_mode = False
+
+    def forward(self, input_spec, query):
+        x = self.first_conv(input_spec)
+        if self.train_mode:
+            condition_embedding = self.embedding(query)
+        else:
+            condition_embedding = query.type_as(x)
+        encoding_outputs = []
+
+        for encoder, downsampling in zip(self.encoders, self.downsamplings):
+            if self.is_encoder_conditioned:
+                x = encoder(x, condition_embedding)
+            else:
+                x = encoder(x)
+            encoding_outputs.append(x)
+            x = downsampling(x)
+
+        if self.is_middle_conditioned:
+            x = self.mid_block(x, condition_embedding)
+        else:
+            x = self.mid_block(x)
+
+        for i in range(self.n):
+            x = self.upsamplings[i](x)
+            x = torch.cat((x, encoding_outputs[-i - 1]), 1)
+
+            if self.is_decoder_conditioned:
+                x = self.decoders[i](x, condition_embedding)
+            else:
+                x = self.decoders[i](x)
+
+        return self.last_conv(x)

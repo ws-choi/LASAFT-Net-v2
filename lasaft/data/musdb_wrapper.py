@@ -8,6 +8,7 @@ import musdb
 import numpy as np
 import soundfile
 import torch
+import librosa
 
 from hydra.utils import to_absolute_path
 
@@ -357,3 +358,72 @@ class SingleTrackSet(Dataset):
 
         track = self.cached
         return track[pos:pos + length] if length is not None else track[pos:]
+
+class MusdbTrainSetwithQuery(MusdbWrapperDataset):
+
+    def __init__(self,
+                 musdb_root='etc/musdb18_samples_wav/',
+                 n_fft=2048,
+                 hop_length=1024,
+                 num_frame=64,
+                 dev_root='etc/musdb18_samples_wav/'):
+        super(MusdbTrainSetwithQuery, self).__init__(musdb_root, 'train', n_fft, hop_length, num_frame)
+        self.idx = None
+        self.start_position = None
+        self.query_length = 44100 * 4 # sample_rate * query_audio_legnth
+
+    def __len__(self):
+        return sum([length // self.window_length for length in self.lengths]) * len(self.target_names)
+
+    def __getitem__(self, whatever):
+        source_sample = {target: self.get_random_audio_sample(target) for target in self.source_names}
+        rand_target = np.random.choice(self.target_names)
+
+        mixture = sum(source_sample.values())
+        target = source_sample[rand_target]
+
+        input_condition = np.array(self.source_names.index(rand_target), dtype=np.long)
+
+        query = self.get_query_audio_sample(rand_target)
+        return torch.from_numpy(mixture), torch.from_numpy(target), torch.from_numpy(query), input_condition
+
+    def get_query_audio_sample(self, target_name):
+        left_audio = self.get_audio(self.idx, target_name, 0, length=self.start_position)
+        if left_audio.shape[0] != 0:
+            left_audio, _ = librosa.effects.trim(left_audio)
+            left_audio = left_audio[-self.query_length//2:, ...]
+        if left_audio.shape[0] < self.query_length//2:
+            left_audio = np.concatenate([
+                np.zeros((self.query_length//2-left_audio.shape[0], 2), dtype=np.float32), left_audio], 0)
+
+        right_audio = self.get_audio(self.idx, target_name, self.start_position + self.window_length, None)
+        if right_audio.shape[0] != 0:
+            right_audio, _ = librosa.effects.trim(right_audio)
+            right_audio = right_audio[:self.query_length//2, ...]
+        if right_audio.shape[0] < self.query_length // 2:
+            right_audio = np.concatenate([
+                right_audio, np.zeros((self.query_length//2 - right_audio.shape[0], 2), dtype=np.float32)], 0)
+
+        query = np.concatenate([left_audio, right_audio], 0)
+        return query
+
+    def get_random_audio_sample(self, target_name):
+        self.idx = random.randint(0, self.num_tracks - 1)
+        return self.get_audio_sample(self.idx, target_name)
+
+    def get_audio(self, idx, target_name, pos=0, length=None, query=False):
+        file_path = self.wav_dict[idx][target_name]
+        arg_dicts = {
+            'file': file_path,
+            'start': pos,
+            'dtype': 'float32'
+        }
+        if length is not None:
+            arg_dicts['stop'] = pos + length
+
+        return soundfile.read(**arg_dicts)[0]
+
+    def get_audio_sample(self, idx, target_name):
+        length = self.lengths[idx] - self.window_length
+        self.start_position = random.randint(0, length - 1)
+        return self.get_audio(idx, target_name, self.start_position, self.window_length)

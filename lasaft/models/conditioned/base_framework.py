@@ -284,3 +284,86 @@ class AbstractLaSAFTNetWithMultiSource(AbstractLaSAFTNet):
             output_spec = input_spec.unsqueeze(1) * output_spec
 
         return output_spec
+
+class AbstractLaSAFTNetWithZeroShot(AbstractLaSAFTNet):
+    def __init__(self,
+                 lr, optimizer, initializer,
+                 n_fft, num_frame, hop_length, spec_type, spec_est_mode,
+                 spec2spec, train_loss, val_loss,
+                 name, norm='bn', query_listen=False, key_listen=False, train_loader=None
+                 ):
+        super().__init__(lr, optimizer, initializer,
+                         n_fft, num_frame, hop_length, spec_type, spec_est_mode,
+                         spec2spec, train_loss, val_loss,
+                         name, norm, query_listen, key_listen)
+        self.mean_latent = torch.FloatTensor(len(self.target_names), self.spec2spec.embedding_dim).zero_()
+        self.num_of_sample = torch.FloatTensor(len(self.target_names)).zero_()
+        self.train_loader = train_loader.get_loader()
+
+    def training_step(self, batch, batch_idx):
+        mixture_signal, target_signal, query_audio, condition = batch
+        loss = self.train_loss(self, mixture_signal, target_signal, target_signal)
+        if isinstance(loss, dict):
+            for key in loss.keys():
+                self.log(key, loss[key], prog_bar=False, logger=True, on_step=False, on_epoch=True,
+                         reduce_fx=torch.mean)
+
+            loss = sum(loss.values())
+
+        self.log('train_loss', loss, prog_bar=False, logger=True, on_step=False, on_epoch=True,
+                 reduce_fx=torch.mean)
+        return loss
+
+    def calculate_query(self):
+        self.eval()
+        with torch.no_grad():
+            for batch in self.train_loader:
+                _, targets, _, _, input_conditions, _ = batch
+                targets = targets.type_as(self.spec2spec.embedding.fc.weight)
+
+                latent = self.spec2spec.embedding(self.to_spec(targets))
+                for i, c in enumerate(input_conditions):
+                    self.mean_latent[c] += latent[i].detach().cpu()
+                    self.num_of_sample[c] += 1
+
+        for i in range(len(self.target_names)):
+            self.mean_latent[i] /= self.num_of_sample[i]
+
+    def on_validation_epoch_start(self):
+        if self.train_loader is not None:
+            self.calculate_query()
+        self.num_val_item = len(self.val_dataloader().dataset)
+        for target_name in self.target_names:
+            self.valid_estimation_dict[target_name] = {mixture_idx: {}
+                                                       for mixture_idx
+                                                       in range(14)}
+        self.spec2spec.train_mode = False
+
+    def on_train_epoch_start(self):
+        self.mean_latent = self.mean_latent.zero_()
+        self.num_of_sample = self.num_of_sample.zero_()
+        self.spec2spec.train_mode = True
+
+    def validation_step(self, batch, batch_idx):
+        mixtures, targets, mixture_ids, window_offsets, input_conditions, target_names = batch
+
+        loss = self.val_loss(self, mixtures, input_conditions, targets)
+        self.log('val_loss', loss, prog_bar=False, logger=True, on_step=False, on_epoch=True, sync_dist=True)
+        return loss
+
+    def forward(self, input_signal, input_condition):
+        if len(input_signal.shape) == 3:
+            input_spec = self.to_spec(input_signal)
+        else:
+            input_spec = input_signal
+        if self.spec2spec.train_mode:
+            input_condition = self.to_spec(input_condition)
+        else:
+            query = torch.FloatTensor(input_spec.size(0), self.spec2spec.embedding_dim).zero_()
+            query = query.type_as(input_spec)
+            for i, c in enumerate(input_condition):
+                query[i] = self.mean_latent[c]
+            input_condition = query
+        output_spec = self.spec2spec(input_spec, input_condition)
+        return output_spec
+

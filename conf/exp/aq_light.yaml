@@ -1,0 +1,23 @@
+# @package _global_
+
+# to execute this experiment run:
+# python run.py experiment=example_simple.yaml
+
+defaults:
+  - override /trainer: single_gpu
+  - override /dataset: audio_query
+  - override /callbacks: default
+  - override /model: aq_light
+  - override /logger: wandb
+
+trainer:
+  gpus: 1
+  check_val_every_n_epoch: 10
+  deterministic: true
+  limit_train_batches: 1.0 # debug mode if 0.01
+
+#dataset:
+#  musdb_root: ${dev_data_dir}
+
+model:
+  name: audioauery_lightsaft_kl_dev

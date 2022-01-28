@@ -7,6 +7,7 @@ from torch.nn.utils import weight_norm
 from lasaft.utils.PoCM_utils import Pocm_Matmul
 
 
+
 def mk_norm_2d(num_channels, norm):
     if norm == 'bn':
         def norm():
@@ -25,6 +26,11 @@ def mk_norm_2d(num_channels, norm):
         def norm():
             return nn.GroupNorm(num_groups, num_channels)
 
+        mk_norm = norm
+
+    elif norm == 'in':
+        def norm():
+            return nn.InstanceNorm2d(num_channels)
         mk_norm = norm
 
     else:
@@ -450,3 +456,54 @@ class TFC_LightSAFT_GPoCM(nn.Module):
         x = x * Pocm_Matmul(x, gamma, beta).sigmoid()
 
         return x + self.tfc_lightsaft.lasaft(x, c)
+
+
+class StridedConv(nn.Module):
+    def __init__(self, in_channel, out_channel, kf, kt, sf, st, norm='in', activation=nn.ReLU):
+        super(StridedConv, self).__init__()
+        mk_norm = mk_norm_2d(out_channel, norm)
+        self.strided_conv = nn.Sequential(
+            nn.Conv2d(in_channel, out_channel, (kt, kf), (st, sf), (kf//2, kt//2)),
+            mk_norm(),
+            activation()
+        )
+
+    def forward(self, x):
+        return self.strided_conv(x)
+
+
+class AudioQueryNet(nn.Module):
+    def __init__(self, in_channel, internal_channels, conv_hiddens, rnn_hidden, condition_dim, kf, kt,
+                       n_fft, stride:int, norm='bn', activation=nn.ReLU):
+        super(AudioQueryNet, self).__init__()
+        mk_norm = mk_norm_2d(internal_channels, norm)
+        self.first_conv = nn.Sequential(
+            nn.Conv2d(in_channel, internal_channels, (1,2)),
+            mk_norm(),
+            activation()
+        )
+
+        self.conv_nets = nn.ModuleList()
+        sf = stride
+        previous_hidden = internal_channels
+        for i, h_channel in enumerate(conv_hiddens):
+            st = stride if i % 3 == 0 else 1
+            self.conv_nets.append(StridedConv(previous_hidden, h_channel, kf, kt, sf, st, norm, activation))
+            previous_hidden = h_channel
+        n_fft = n_fft//2
+        n_fft = n_fft//(stride ** len(conv_hiddens))
+        self.gru = nn.GRU(input_size=previous_hidden*n_fft, hidden_size=rnn_hidden, batch_first=True)
+        self.fc = nn.Linear(rnn_hidden, condition_dim)
+
+    def forward(self, x):
+        x = self.first_conv(x)
+
+        for layer in self.conv_nets:
+            x = layer(x)
+        b, c, t, f = x.size()
+        x = torch.reshape(x.transpose(-1, -2), (b, -1, t))
+        x = x.transpose(-1, -2)
+        x, _ = self.gru(x)
+        x = torch.mean(x, dim=1)
+        x = self.fc(x)
+        return x
