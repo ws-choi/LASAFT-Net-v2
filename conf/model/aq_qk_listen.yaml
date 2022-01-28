@@ -1,0 +1,92 @@
+# @package model
+
+lr: 1e-3
+optimizer: adam
+initializer: kaiming
+
+name: audioquery_lightsaft
+norm: 'bn'
+_target_: lasaft.models.conditioned.base_framework.AbstractLaSAFTNetWithZeroShot
+
+n_fft: 2048
+num_frame: 128
+hop_length: 1024
+spec_type: complex
+spec_est_mode: mapping
+
+train_loss: spec_mse
+val_loss: raw_l1
+
+query_listen: True
+key_listen: True
+
+train_loader:
+  _target_: lasaft.data.data_provider.QueryProvider
+  musdb_root: ${dataset.musdb_root}
+  batch_size: ${dataset.batch_size}
+  num_workers: ${dataset.num_workers}
+  pin_memory: ${dataset.pin_memory}
+  num_frame: ${dataset.num_frame}
+  hop_length: ${dataset.hop_length}
+  n_fft: ${dataset.n_fft}
+  multi_source_training: ${dataset.multi_source_training}
+  audio_query: ${dataset.audio_query}
+
+spec2spec:
+    _target_: lasaft.models.conditioned.spec2spec.base.BaseNetWithZeroShot
+    n_fft: ${model.n_fft}
+    input_channels: 4
+    internal_channels: 24
+    n_blocks: 7
+    n_internal_layers: 5
+    first_conv_activation: relu
+    last_activation: identity
+    control_vector_type: custom
+    control_input_dim: 4
+    embedding_dim: 32
+    condition_to: decoder
+    norm: ${model.norm}
+
+    custom_embedding:
+        _target_: lasaft.models.sub_modules.building_blocks.AudioQueryNet
+        in_channel: ${model.spec2spec.input_channels}
+        internal_channels: ${model.spec2spec.internal_channels}
+        conv_hiddens:
+          - 16
+          - 16
+          - 32
+          - 32
+          - 64
+          - 64
+        rnn_hidden: 128
+        condition_dim: ${model.spec2spec.embedding_dim}
+        kf: 3
+        kt: 3
+        n_fft: ${model.n_fft}
+        stride: 2
+        norm: 'in'
+
+    mk_block_f:
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MkTFCLightSAFTGPoCM
+      gr: ${model.spec2spec.internal_channels}
+      num_layers: ${model.spec2spec.n_internal_layers}
+      kt: 3
+      kf: 3
+      bn_factor: 16
+      min_bn_units: 16
+      bias: False
+      activation: relu
+      condition_dim: ${model.spec2spec.embedding_dim}
+      num_tdfs: 16
+      dk: 32
+      norm: ${model.norm}
+
+    mk_ds_f:
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MKConvDS
+      activation: relu
+      norm: ${model.norm}
+
+    mk_us_f:
+      _target_: lasaft.models.conditioned.spec2spec.block_functions.MkConvTransposeUS
+      activation: relu
+      norm: ${model.norm}
