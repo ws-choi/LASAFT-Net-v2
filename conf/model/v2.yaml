@@ -3,7 +3,7 @@ lr: 5e-4
 optimizer: adam
 initializer: kaiming
 
-name: v2
+name: v2_less_bn
 _target_: lasaft.models.conditioned.base_framework.AbstractLaSAFTNet
 
 query_listen: True
