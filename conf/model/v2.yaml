@@ -44,7 +44,7 @@ spec2spec:
       bn_factor: 16
       min_bn_units: 16
       bias: False
-      activation: relu
+      activation: leaky_relu
       condition_dim: ${model.spec2spec.embedding_dim}
       num_tdfs: 16
       dk: 32
@@ -54,10 +54,10 @@ spec2spec:
 
     mk_ds_f:
       _target_: lasaft.models.conditioned.spec2spec.block_functions.MKConvDS
-      activation: relu
+      activation: leaky_relu
       norm: ${model.norm}
 
     mk_us_f:
       _target_: lasaft.models.conditioned.spec2spec.block_functions.MkConvTransposeUS
-      activation: relu
+      activation: leaky_relu
       norm: ${model.norm}

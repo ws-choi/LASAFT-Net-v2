@@ -50,14 +50,14 @@ class TFC(nn.Module):
         c = in_channels
         self.H = nn.ModuleList()
 
-        mk_norm_func = mk_norm_2d(gr, norm)
+        mk_norm_func = mk_norm_2d(c, norm)
+        self.bn = mk_norm_func()
 
         for i in range(num_layers):
             self.H.append(
                 nn.Sequential(
                     nn.Conv2d(in_channels=c, out_channels=gr, kernel_size=(kf, kt), stride=1,
                               padding=(kt // 2, kf // 2)),
-                    mk_norm_func(),
                     activation(),
                 )
             )
@@ -67,7 +67,7 @@ class TFC(nn.Module):
 
     def forward(self, x):
         """ [B, in_channels, T, F] => [B, gr, T, F] """
-        x_ = self.H[0](x)
+        x_ = self.H[0](self.bn(x))
         for h in self.H[1:]:
             x = torch.cat((x_, x), 1)
             x_ = h(x)
