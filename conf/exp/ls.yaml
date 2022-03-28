@@ -9,11 +9,18 @@ defaults:
 
 trainer:
   gpus: 1
-  check_val_every_n_epoch: 10
+  check_val_every_n_epoch: 5
   deterministic: true
   limit_train_batches: 1.0 # debug mode if 0.01
+  max_epochs: 400
 
 num_ls: null
 
 model:
   num_ls: ${num_ls}
+
+callbacks:
+  model_checkpoint:
+    save_top_k: 10
+
+
