@@ -38,7 +38,6 @@ def train(cfg: DictConfig):
     loggers = None
     if 'logger' in cfg:
 
-
         loggers = []
 
         for logger in cfg['logger']:
@@ -46,7 +45,8 @@ def train(cfg: DictConfig):
                 cfg['logger']['wandb']['tags'].append(model.name)
                 if 'dev' in model.name:
                     cfg['logger']['wandb']['tags'].append('dev_mode')
-                cfg['logger']['wandb']['name'] = '{}_{}_{}'.format(model.name, cfg['seed'], str(model.lr))
+                cfg['logger']['wandb']['name'] = '{}_{}_{}_ls{}'.format(model.name, cfg['seed'], str(model.lr),
+                                                                      str(model.num_ls))
                 wandb_login(key=cfg['wandb_api_key'])
                 logger = hydra.utils.instantiate(cfg['logger']['wandb'])
                 logger.watch(model, log='all')

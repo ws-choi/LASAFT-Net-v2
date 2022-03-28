@@ -86,16 +86,12 @@ class STFT(pl.LightningModule):
         output: *, signal
         """
         if spec_complex.dtype != self.window.dtype:
-            window = torch.as_tensor(self.window, dtype=spec_complex.dtype)
-        else:
-            window = self.window
+            spec_complex = torch.as_tensor(spec_complex, dtype=self.window.dtype)
 
         if spec_complex.device != self.window.device:
-            window = window.to(spec_complex.device)
-        else:
-            window = self.window
+            spec_complex = spec_complex.to(self.window.device)
 
-        return torch.istft(spec_complex, self.n_fft, self.hop_length, window=window, return_complex=False)
+        return torch.istft(spec_complex, self.n_fft, self.hop_length, window=self.window, return_complex=False)
 
     def restore_mag_phase(self, mag, phase, power=1.):
         """

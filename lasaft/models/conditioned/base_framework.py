@@ -17,7 +17,8 @@ class AbstractLaSAFTNet(AbstractSeparator):
                  spec2spec, train_loss, val_loss,
                  name='no_name', norm='bn',
                  query_listen=True,
-                 key_listen=True
+                 key_listen=True,
+                 num_ls=16
                  ):
         super(AbstractLaSAFTNet, self).__init__(lr, optimizer, initializer)
 
@@ -29,6 +30,7 @@ class AbstractLaSAFTNet(AbstractSeparator):
         self.norm = norm
         self.query_listen = query_listen  # Not explicitly used but needed for yaml
         self.key_listen = key_listen  # Not explicitly used but needed for yaml
+        self.num_ls = num_ls # Not explicitly used but needed for yaml
 
         assert spec_type in ['magnitude', 'complex']
         assert spec_est_mode in ['masking', 'mapping']
@@ -59,14 +61,6 @@ class AbstractLaSAFTNet(AbstractSeparator):
         self.log('train_loss', loss, prog_bar=False, logger=True, on_step=False, on_epoch=True,
                  reduce_fx=torch.mean)
         return loss
-
-    # Validation Process
-    def on_validation_epoch_start(self):
-        self.num_val_item = len(self.val_dataloader().dataset)
-        for target_name in self.target_names:
-            self.valid_estimation_dict[target_name] = {mixture_idx: {}
-                                                       for mixture_idx
-                                                       in range(14)}
 
     def validation_step(self, batch, batch_idx):
 

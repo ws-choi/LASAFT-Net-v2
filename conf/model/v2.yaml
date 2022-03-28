@@ -4,6 +4,7 @@ optimizer: adam
 initializer: kaiming
 
 name: v2
+num_ls: 16
 _target_: lasaft.models.conditioned.base_framework.AbstractLaSAFTNet
 
 query_listen: True
@@ -46,7 +47,7 @@ spec2spec:
       bias: False
       activation: relu
       condition_dim: ${model.spec2spec.embedding_dim}
-      num_tdfs: 16
+      num_tdfs: ${model.num_ls}
       dk: 32
       norm: ${model.norm}
       query_listen: ${model.query_listen}
