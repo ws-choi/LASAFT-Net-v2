@@ -58,7 +58,6 @@ def eval_ckpt(cfg: DictConfig, model, ckpt, train_seed):
                 cfg['logger']['wandb']['name'] = '{}_{}_{}_{}_ls{}'.format(model.name, train_seed, str(model.lr),
                                                                            ckpt_name, str(model.num_ls))
 
-                cfg['logger']['wandb']['name'] = '{}_{}_{}'.format(model_name, train_seed, ckpt_name)
                 cfg['logger']['wandb']['project'] = 'lasaft_eval'
                 cfg['logger']['wandb']['reinit'] = True
 
