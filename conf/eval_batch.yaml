@@ -31,3 +31,5 @@ data_dir: ${oc.env:data_dir}
 wandb_api_key: ${oc.env:wandb_api_key}
 
 debug: False
+
+num_ls: null
