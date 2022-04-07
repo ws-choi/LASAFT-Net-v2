@@ -1,0 +1,36 @@
+# @package _global_
+
+defaults:
+  - override /trainer: single_gpu
+  - override /dataset: default
+  - override /callbacks: default
+  - override /model: v2
+  - override /logger: wandb
+
+trainer:
+  gpus: 1
+  check_val_every_n_epoch: 5
+  deterministic: true
+  limit_train_batches: 1.0 # debug mode if 0.01
+  max_epochs: 400
+  max_steps: 1292000
+
+num_ls: 16
+
+n_fft: 1024
+hop_length: 512
+
+model:
+  num_ls: ${num_ls}
+  n_fft: ${n_fft}
+  hop_length: ${hop_length}
+
+dataset:
+  n_fft: ${n_fft}
+  hop_length: ${hop_length}
+
+callbacks:
+  model_checkpoint:
+    save_top_k: 10
+
+
