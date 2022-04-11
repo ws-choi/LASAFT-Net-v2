@@ -55,8 +55,8 @@ def eval_ckpt(cfg: DictConfig, model, ckpt, train_seed):
                 if 'dev' in model_name:
                     cfg['logger']['wandb']['tags'].append('dev_mode')
 
-                cfg['logger']['wandb']['name'] = '{}_{}_{}_{}_ls{}'.format(model.name, train_seed, str(model.lr),
-                                                                           ckpt_name, str(model.num_ls))
+                cfg['logger']['wandb']['name'] = '{}_{}_{}_{}_nfft{}'.format(model.name, train_seed, str(model.lr),
+                                                                           ckpt_name, str(model.n_fft))
 
                 cfg['logger']['wandb']['project'] = 'lasaft_eval'
                 cfg['logger']['wandb']['reinit'] = True
@@ -66,6 +66,9 @@ def eval_ckpt(cfg: DictConfig, model, ckpt, train_seed):
                 wandb_login(key=cfg['wandb_api_key'])
 
                 hparams = {}
+                hparams["n_fft"] = cfg['n_fft']
+                hparams["hop_length"] = cfg['hop_length']
+                hparams["num_ls"] = cfg['num_ls']
                 hparams["model"] = cfg['model']
                 hparams['overlap_ratio'] = cfg['overlap_ratio']
                 # save number of model parameters
